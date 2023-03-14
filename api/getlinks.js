@@ -26,28 +26,24 @@ try {
 
     const user_id = user._id;
 
+    const expiredAt_parsed = JSON.parse(expiredAt);
+
+    console.log(expiredAt_parsed);
+
     const links = await Link.find({
         userId: user_id,
-        expiredAt:{  
-            $gt: new Date(expiredAt)
-        }
+        expiredAt: expiredAt_parsed
     });
 
-    const link = []
 
-    for (let index = 0; index < links.length; index++) {
-        link.push(links[index].link.cut)
-    }
-
-    console.log(expiredAt);
-
-    res.status(200).send(link);
+    res.status(200).send(links);
     
     
 
 
 
 } catch (error) {
+    console.log(error);
     res.status(400).send('Something went wrong');
 }
 

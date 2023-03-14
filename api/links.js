@@ -51,7 +51,8 @@ router.post('/links', async (req,res) =>{
         const newLink = await doc.save();
 
         const linkResponse = {};
-        linkResponse.link = newLink.link.cut;
+
+        linkResponse.link =  newLink.link.cut;
         linkResponse.expiredAt = newLink.expiredAt;
 
         res.status(200).send(linkResponse);
@@ -65,12 +66,17 @@ router.post('/links', async (req,res) =>{
         
         return res.status(400).send("Something went wrong");
     }
+
+
 })
 
 
 
 
 module.exports = {router}
+
+
+
 
 
 
