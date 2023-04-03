@@ -32,7 +32,7 @@ try {
 
     const links = await Link.find({
         userId: user_id,
-        expiredAt: expiredAt_parsed
+        expiredAt: expiredAt_parsed 
     });
 
 

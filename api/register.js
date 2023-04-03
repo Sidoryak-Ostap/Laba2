@@ -24,8 +24,25 @@ router.post('/users', CheckUser, checkRegister, async (req,res) => {
 
     const {email, password} = req.body;
 
-    const token = generateApiKey();
+    let token = generateApiKey();
 
+    for(let i=0; i<=1;)
+    {
+        const tokenExcist = await User.countDocuments({apiKey: token});
+        console.log(tokenExcist);
+        if(tokenExcist != 0 )
+        {
+            token = generateApiKey();
+        } else{
+            break;
+        }
+       
+    }
+
+
+   
+
+   
     
 
     const doc = new User({
@@ -42,6 +59,7 @@ router.post('/users', CheckUser, checkRegister, async (req,res) => {
     res.status(200).send(newUser);
         
     } catch (error) {
+        console.log(error);
         return res.send('Щось пішло не так');
         
     }
