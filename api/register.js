@@ -26,21 +26,14 @@ router.post('/users', CheckUser, checkRegister, async (req,res) => {
 
     let token = generateApiKey();
 
-    for(let i=0; i<=1;)
+
+    const tokenExcist = await User.findOne({apiKey: token});
+    while(tokenExcist)
     {
-        const tokenExcist = await User.countDocuments({apiKey: token});
-        console.log(tokenExcist);
-        if(tokenExcist != 0 )
-        {
-            token = generateApiKey();
-        } else{
-            break;
-        }
-       
+        token = generateApiKey();
+        tokenExcist = await User.findOne({apiKey: token})
     }
 
-
-   
 
    
     

@@ -16,6 +16,7 @@ router.get('/shortLink/:cut', async (req,res) =>{
         const queryDb = {}
 
         queryDb["link.cut"] = cut;
+   
 
         const link = await Link.findOne(queryDb);
     

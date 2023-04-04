@@ -20,7 +20,7 @@ try {
 
     if(!user)
     {
-        return res.status(200).send("User with such credentials was not found");
+        return res.status(400).send("User with such credentials was not found");
     }
 
 
@@ -32,7 +32,8 @@ try {
 
     const links = await Link.find({
         userId: user_id,
-        expiredAt: expiredAt_parsed 
+        expiredAt: expiredAt_parsed
+
     });
 
 
